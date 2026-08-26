@@ -4,6 +4,8 @@ name: Hello World                  # Workflow 的名称，显示在 GitHub Actio
 
 on: 
     push:                           # 触发条件：任意分支有代码推送时触发
+        paths:
+            - 'src/**' 
     workflow_dispatch:           # 触发条件：手动触发时触发   
 
 jobs:                              # 定义所有 Job
