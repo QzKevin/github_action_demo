@@ -1,0 +1,23 @@
+# .github/workflows/schedule.yml
+
+name: 定时任务                 # Workflow 的名称，显示在 GitHub Actions 页面上
+
+on: 
+    schedule: 
+    # Cron 格式：分 时 日 月 星期
+    - cron: '0 8 * * *'   # 每天 8 点触发 即北京时间16:00:00
+
+# 常用 Cron 表达式速查：
+# '0 0 * * *'    每天午夜（UTC 00:00）
+# '0 * * * *'    每小时整点
+# '0 0 * * 0'    每周日午夜
+# '0 0 1 * *'    每月 1 号午夜
+
+jobs:
+    say-schedule:
+        name: 打印定时任务
+        runs-on: ubuntu-latest
+        steps:
+            - name: 打印定时任务
+              run: echo "定时任务触发了！"
+        
