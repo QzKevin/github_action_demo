@@ -1,0 +1,34 @@
+# .github/workflows/dispatch.yml
+
+name: 手动触发                 # Workflow 的名称，显示在 GitHub Actions 页面上
+
+on: 
+    workflow_dispatch:           # 触发条件：手动触发时触发   
+        inputs:
+            environment:             # 输入参数的名称（可在 steps 中通过 ${{ inputs.environment }} 引用）
+                description: '部署目标环境'   # 参数的描述，显示在手动触发的表单中
+                required: true          # 是否为必填项
+                default: 'staging'      # 默认值
+                type: choice            # 参数类型：choice（下拉选择）
+                options:
+                - staging             # 可选值
+                - production
+        
+            run_tests:
+                description: '是否运行测试'   # 参数的描述，显示在手动触发的表单中
+                required: true          # 是否为必填项
+                type: boolean            # 参数类型：boolean（布尔值）
+                default: false            # 默认值
+
+
+jobs:
+    say-dispatch:
+        name: 打印手动触发
+        runs-on: ubuntu-latest
+        steps:
+            - name: 打印手动触发
+              run: echo "手动触发了！环境：${{ inputs.environment }}，是否运行测试：${{ inputs.run_tests }}"
+        # run：直接执行 Shell 命令
+        # 这里打印 "手动触发了！"
+        # 所以，当手动触发时，会打印 "手动触发了！"
+        
