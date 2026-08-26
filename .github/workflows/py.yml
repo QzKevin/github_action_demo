@@ -29,3 +29,8 @@ jobs:
                 echo "请检查 requirements_installed.txt 文件，确认依赖是否安装正确。"
                 echo "如果依赖安装失败，请检查 requirements.txt 文件，确认依赖是否正确。"
 
+            - name: 上传依赖列表文件
+              uses: actions/upload-artifact@v4
+              with:
+                name: requirements-installed
+                path: requirements_installed.txt
