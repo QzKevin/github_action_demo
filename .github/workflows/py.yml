@@ -29,8 +29,11 @@ jobs:
                 echo "请检查 requirements_installed.txt 文件，确认依赖是否安装正确。"
                 echo "如果依赖安装失败，请检查 requirements.txt 文件，确认依赖是否正确。"
 
-            - name: 上传依赖列表文件
-              uses: actions/upload-artifact@v4
+            - name: 创建 PR 提交依赖列表文件
+              uses: peter-evans/create-pull-request@v6
               with:
-                name: requirements-installed
-                path: requirements_installed.txt
+                title: "chore: 更新 requirements_installed.txt"
+                body: "由 GitHub Actions 自动生成的已安装依赖列表文件。"
+                branch: update-requirements-installed
+                commit-message: "chore: 更新 requirements_installed.txt"
+                add-paths: requirements_installed.txt
