@@ -1,0 +1,31 @@
+# .github/workflows/py.yml
+
+name: Python Workflow
+
+on:
+    workflow_dispatch:
+
+jobs:
+    say-python:
+        name: Setup Python environment
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: 配置 Python 环境
+              uses: actions/setup-python@v5
+              with:
+                python-version: 3.11
+
+            - name: 安装依赖
+              run: pip install -r requirements.txt
+
+            - name: 输出 Python 版本以及生成依赖列表文件
+              run: |
+                python --version
+                pip list --format=freeze > requirements_installed.txt
+                cat requirements_installed.txt
+                echo "依赖列表已生成到 requirements_installed.txt 文件中"
+                echo "请检查 requirements_installed.txt 文件，确认依赖是否安装正确。"
+                echo "如果依赖安装失败，请检查 requirements.txt 文件，确认依赖是否正确。"
+
